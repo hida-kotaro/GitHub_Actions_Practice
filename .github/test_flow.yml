@@ -1,0 +1,29 @@
+name: Test Workflow
+# トリガー条件の設定
+on:
+  push:
+    branches:
+      - main
+# 処理を定義
+jobs:
+# 任意の名前
+  saisyo:
+    #何で動作させるか
+    runs-on: ubuntu-latest
+    #動作を定義
+    steps:
+      - name: saisyo_stap1
+        run: echo "最初のステップ1"
+      - name: saisyo_stap2
+        run: echo "最初のステップ2"
+
+  niban:
+    runs-on: ubuntu-latest
+    steps:
+      - name: niban_stap1
+        run: echo "2番のステップ1"
+      - name: niban_stap2
+        run: echo "2番のステップ2"
+        
+        
+        
