@@ -1,0 +1,428 @@
+/*--------------------------------------
+Message style for website
+Author URI: https://jisuijisan.com;
+Version: 20221110
+----------------------------------------*/
+ 
+/*====================================
+初期化と基本設定
+======================================*/
+.message * {
+    margin: 0;
+    padding: 0;
+    line-height: 1.4!important;
+    font: normal 14px "ヒラギノ角ゴ Pro W3","Hiragino Kaku Gothic Pro","Helvetica Neue", "Lucida Sans Unicode", "Arial";
+    color: #333;
+}
+.message p {
+    margin: 0;
+    padding: 0;
+}
+.message img {
+    display: auto;
+    width: 100%;
+    height: auto;
+    border: none;
+}
+/*iPhone幅のフレーム（高さ成り行き）*/
+.message .frame {
+    position: relative;
+    width: 325px;
+    height: auto;
+    margin: 0 auto;
+    border: solid #ddd 1px;
+    overflow: hidden;
+}
+/*iPhone再現サイズのフレーム*/
+.message .frame:has(.header) {
+    height: 704px;
+}
+/*ヘッダーとフッター*/
+.message .frame .header,
+.message .frame .footer {
+    position: absolute;
+    width: 100%;
+    backdrop-filter: blur(20px);  
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 100;   
+}
+ 
+/*=====================================
+各エリア設定
+======================================*/
+ 
+/*-------------------------------
+ヘッダー
+--------------------------------*/
+ 
+/*ヘッダーの基本設定*/
+.message .frame .header {
+    height: 101px;
+    left: 0;
+    top: 0;
+    border-bottom: 1px #b9b9b9 solid;
+    background: rgba(247,247,247,0.9);
+    text-align: center;    
+}
+    /*Firefox*/
+    @-moz-document url-prefix() {
+    .message .frame .header {
+        background: rgba(247,247,247,0.95);
+    }}
+/*戻るボタン*/
+.message .frame .header::before {
+    position: absolute;
+    content: "";
+    width: 14px;
+    height: 14px; 
+    left: 13px;
+    top: 49px;
+    border: none; 
+    background: none;
+    box-shadow: 3px 3px 0 0 #2793fa inset;
+    transform: rotate(-45deg);
+}
+/*ヘッダーイメージ*/
+.message .frame .top {
+    height: 42px;
+    background: url(img/header.png);
+}
+ 
+/*ヘッダー時刻表示*/
+.message .frame .current_time {
+    position: absolute;
+    top: 13px;
+    left: 17px;
+    line-height: 15px!important;
+    font-family: "Helvetica Neue";
+    font-size: 14px !important;
+}
+    /*Firefox*/
+    @-moz-document url-prefix()  {
+    .message .frame .current_time {
+        left: 13px;
+        font-size: 14px !important;
+    }}
+    /*Chrome*/
+    _:lang(x)::-internal-media-controls-overlay-cast-button, 
+    .message .frame .current_time {
+        left: 13px;
+        font-size: 14px !important;
+    }
+ 
+/*ヘッダー：相手のアイコン*/
+.message .frame .account {
+    height: 59px;
+    padding: 34px 0 0 6px;
+    background: url(img/avatar.png) center 0 no-repeat;
+}
+ 
+/*ヘッダー：相手の名前*/
+.message .frame .name {
+    display: inline-block;
+    line-height: 10px !important;
+    font-size: 10px !important;
+}
+/*次へボタン*/
+.message .frame .name::after {
+    display: inline-block;
+    content: "";
+    width: 6px;
+    height: 6px;
+    margin-bottom: 1px;
+    border: none; 
+    background: none;
+    box-shadow: -2px 2px 0 0 #999 inset;
+    transform: rotate(45deg);
+}
+ 
+/*---------------------------------
+フッター
+----------------------------------*/
+ 
+.message .frame .footer {
+    height: 108px;
+    left: 0;
+    bottom: 0;
+    background: rgba(255,255,255,0.75) url(img/footer.png) no-repeat;
+}
+    /*Firefox*/
+    @-moz-document url-prefix() {
+    .message .frame .footer {
+        background: rgba(255,255,255,0.9) url(img/footer.png) no-repeat;
+    }}
+ 
+/*----------------------------------
+メッセージボディ
+-----------------------------------*/
+ 
+.message .cont {
+    padding: 10px 0 10px;/*iPhone再現サイズ以外*/
+    background: #fff;
+    z-index: 1;
+}
+/*iPhone再現サイズ（.headerがあるとき）*/
+.message .frame .header ~ .cont {
+    width: 340px;/*スクロールバーをはみ出させて隠す*/
+    height: 483px;
+    padding-top: 101px;
+    padding-bottom: 120px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+    /* Edge */
+    @supports (-ms-ime-align: auto) {
+    .message .frame .header + .cont > div:last-of-type {
+        margin-bottom: 120px;
+    }}
+    /*Firefox*/
+    @-moz-document url-prefix()  {
+    .message .frame .header + .cont > div:last-of-type  {
+        margin-bottom: 120px;
+    }}
+    /*スマホ、タブレット.細いスクロールバーに対応*/
+    @media only screen and (max-width: 1112px) {
+        .message .frame .header + .cont {
+            width: 330px;
+    }}
+ 
+/*======================================
+メッセージボディ内パーツ
+=======================================*/
+ 
+/*メッセージの種類と日時*/
+.message .info {
+    margin: 2em 14px 0.8em;
+    text-align: center;
+    font-family: "ヒラギノ角ゴ Pro W6";
+    font-size: 11px;
+    color: #aaa;
+}
+    .message .info .bold {
+       font-size: inherit;
+       font-weight: bold;
+       color: inherit;
+    }
+/*既読表示*/
+.message .info.read {
+    margin-top: 0;
+    text-align: right;
+}
+ 
+/*-------------------------
+         フキダシ
+--------------------------*/
+ 
+/*メッセージのブロック*/
+.message .talk_block {
+    position: relative;
+    margin-bottom: 6px;
+    overflow: hidden;
+}
+    /*意図的にしっぽを削除した場合*/
+    .message .talk_block.notail {
+        margin-bottom: 0;
+    }
+ 
+/*フキダシの左右揃え*/
+.message .talk_block.other * {
+    float: left;
+}
+.message .talk_block:not(.other) * {
+    float: right;
+}
+ 
+/*フキダシの基本設定*/
+.message .speech_bubble {
+    position: relative;
+    clear: both;
+}
+/*画像添付でないフキダシ*/
+.message .talk_block:not(.img) .speech_bubble {
+    max-width: 50%;/*iPhoneを再現しないとき*/
+    margin: 1px 14px 0px;
+    padding: 9px 14px;
+    border-radius: 15px;
+    color: #fff;
+    overflow-wrap: break-word;
+    text-align: left;
+}
+    /*iPhoneを再現するとき*/
+    .message .frame .talk_block:not(.img) .speech_bubble {
+        max-width: 192px;
+    }
+ 
+/*画像添付のフキダシ設定*/
+.message .img .speech_bubble {
+    width: 216px;
+    margin: 1px 9px 0;
+    padding: 0;
+}
+/*画像添付の画像のマージン*/
+.message .img .speech_bubble img {
+    margin: 0;
+}
+ 
+/*------------------------------
+フキダシの配色
+--------------------------------*/
+ 
+/*フキダシの配色_相手側*/
+.message .other .speech_bubble {
+    background-color: #e9e9ed;
+    color: #000 !important;
+}
+/*フキダシの配色_iMessage*/
+.message .ims .speech_bubble {
+    background-color:  #2793fa;
+}
+/*フキダシの配色_SMS/MMS*/
+.message .sms .speech_bubble {
+    background-color: #32cd54;
+}
+ 
+/*=============================
+フキダシのしっぽ
+==============================*/
+ 
+/*フキダシのしっぽ,添付画像の角丸共通*/
+.message .talk_block::before,
+.message .talk_block::after,
+.message .speech_bubble::before,
+.message .speech_bubble::after {
+    position: absolute;
+    border: none;
+    background: none;
+    z-index: 10;
+}
+ 
+/*フキダシのしっぽ共通*/
+.message .talk_block:not(.img):not(.notail)::after {
+    content: "";
+    width: 15px;
+    height: 17px; 
+    bottom: 0;
+}
+ 
+/*フキダシのしっぽ_相手側*/
+.message .other:not(.img)::after {
+    left: 9px;
+    border-radius: 0px 0  15px 0px/ 0px 0 11px 0; 
+    box-shadow: -13px 2px 0 -3px #e9e9ed inset; 
+}
+/*フキダシのしっぽ_iMessage*/
+.message .ims:not(.img)::after {
+    right: 9px;
+    border-radius: 0px 0  0 15px/ 0px 0 0 11px; 
+    box-shadow: 13px 2px 0 -3px #2793fa inset;  
+}
+/*フキダシのしっぽ_SMS/MMS*/
+.message .sms:not(.img)::after {
+    right: 9px;
+    border-radius: 0px 0  0 15px/ 0px 0 0 11px; 
+    box-shadow: 13px 2px 0 -3px #32cd54 inset;  
+}
+ 
+/*===================================
+画像添付のフキダシのしっぽと角丸
+=====================================*/
+ 
+/*画像添付しっぽ共通*/
+.message .img:not(.notail)::after {
+    content: url(img/img_tail.svg);
+    width: 22px;
+    height: 12px;
+    bottom: 1px;  
+}
+/*画像添付しっぽ_相手側*/
+.message .other.img::after {
+    left: 8px;    
+}
+/*画像添付しっぽ_自分側*/
+.message .img:not(.other):not(.notail)::after {
+    right: 8px;    
+    transform: scale(-1, 1);
+}
+/*画像添付しっぽなし*/
+.message .img.notail::after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    bottom: 0;    
+}
+/*画像添付しっぽなし_相手側*/
+.message .other.img.notail::after {
+    left: 14px;
+    border-radius: 0 0 0 15px;
+    box-shadow:  -6px 6px 0 2px #fff;
+ }
+ /*画像添付しっぽなし_自分側*/
+.message .img:not(.other).notail::after {
+    right: 14px;
+    border-radius: 0 0 15px 0;
+    box-shadow:  6px 6px 0 2px #fff;
+}
+/*画像添付しっぽの上辺マスク*/
+.message .img::before {
+    content: "";
+    width: 6px;
+    height: 2000px;
+    bottom: 9px;
+    background: #fff;
+}
+/*画像添付しっぽの上辺マスク_相手側*/
+.message .other.img::before {
+    left: 8px;
+}
+/*画像添付しっぽの上辺マスク_自分側*/
+.message .img:not(.other)::before {
+    right: 8px;
+}
+ 
+/*画像添付上左右の角丸*/
+.message .img .speech_bubble:first-of-type::before {
+    content: "";
+    width: 211px;
+    height: 16px;
+    top: 0px;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 -6px 0 5px #fff;
+}
+/*画像添付上左右の角丸_相手側*/
+.message .other.img .speech_bubble:first-of-type::before {
+    left: 5px;
+}
+/*画像添付上左右の角丸_自分側*/
+.message .img:not(.other) .speech_bubble:first-of-type::before {
+    right: 5px;
+}
+ 
+/*画像添付下内側角丸共通*/
+.message .img .speech_bubble::after {
+    content: "";
+    width: 16px;
+    height: 16px;
+    bottom: 0px;
+}
+/*画像添付下内側角丸_相手側（右下）*/
+.message .other.img .speech_bubble:last-of-type::after {
+    right: 0px;
+    border-radius: 0 0 15px 0;
+    box-shadow: 4px 4px 0 3px #fff;
+}
+/*画像添付下内側角丸_自分側（左下）*/
+.message .img:not(.other) .speech_bubble:last-of-type::after {
+    left: 0;
+    border-radius: 0 0 0 15px;
+    box-shadow: -4px 4px 0 3px #fff;
+}
+ 
+/*==============================
+画像を連投した場合の区切り線
+===============================*/
+.message .speech_bubble img:not(:first-of-type) {
+    border-top: #fff 1px solid;
+}
+.message .speech_bubble:not(:first-of-type) img {
+    border-top: #fff 1px solid;
+}
